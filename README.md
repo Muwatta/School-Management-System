@@ -1,26 +1,69 @@
-# Lama Dev School Management Dashboard
+# School Website
 
-## Getting Started
+This project is a school website that allows for task submissions and result
+generation. It is designed to facilitate communication between teachers and
+students regarding tasks and their results.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Task Submission**: Teachers and students can submit tasks through a
+  user-friendly interface.
+- **Results Display**: Submitted tasks are processed, and results are displayed
+  in a structured format.
+- **Teacher List**: A component to view and manage teachers involved in the task
+  submissions.
+
+## Project Structure
+
+```
+school-website
+├── src
+│   ├── app
+│   │   ├── page.tsx          # Main entry point for the application
+│   │   ├── tasks
+│   │   │   └── index.tsx     # Task submission interface
+│   │   └── results
+│   │       └── index.tsx     # Results display
+│   ├── components
+│   │   ├── TaskSubmissionForm.tsx  # Form for task submissions
+│   │   ├── ResultList.tsx         # Displays a list of results
+│   │   └── TeacherList.tsx        # Lists teachers
+│   ├── lib
+│   │   └── data.ts                # Mock data and utility functions
+│   └── types
+│       └── index.ts               # TypeScript interfaces and types
+├── package.json                    # npm configuration
+├── tsconfig.json                   # TypeScript configuration
+└── README.md                       # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```
+   git clone <repository-url>
+   ```
+2. Navigate to the project directory:
+   ```
+   cd school-website
+   ```
+3. Install dependencies:
+   ```
+   npm install
+   ```
+4. Start the development server:
+   ```
+   npm run dev
+   ```
 
-## Learn More
+## Usage
 
-To learn more about Next.js, take a look at the following resources:
+- Navigate to the homepage to access the task submission and results sections.
+- Use the task submission form to submit tasks.
+- View results in the results section after submission.
 
-- [Lama Dev Youtube Channel](https://youtube.com/lamadev) 
-- [Next.js](https://nextjs.org/learn)
+## Contributing
+
+Contributions are welcome! Please open an issue or submit a pull request for any
+enhancements or bug fixes.
+# School-Management-System
