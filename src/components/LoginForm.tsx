@@ -1,12 +1,14 @@
 "use client";
 import Link from 'next/link';
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 type LoginFormProps = {
   onSuccess?: (user: any) => void;
 };
 
 export default function LoginForm({ onSuccess }: LoginFormProps) {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,6 +27,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       const data = await res.json();
       if (data.success) {
         (onSuccess || (() => {}))(data.user);
+        router.push('/dashboard');
       } else {
         setError(data.message || 'Login failed');
       }
@@ -38,7 +41,6 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto bg-white p-8 rounded shadow mt-10"
     >
       <h2 className="text-2xl font-bold mb-6 text-blue-900 text-center">
         Login
@@ -47,6 +49,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       <div className="mb-4">
         <label className="block mb-1 text-blue-900 font-medium">Email</label>
         <input
+          name="email"
           type="email"
           className="w-full border rounded px-3 py-2"
           value={email}
@@ -57,6 +60,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
       <div className="mb-6">
         <label className="block mb-1 text-blue-900 font-medium">Password</label>
         <input
+          name="password"
           type="password"
           className="w-full border rounded px-3 py-2"
           value={password}

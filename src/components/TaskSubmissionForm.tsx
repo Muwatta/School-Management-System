@@ -4,14 +4,15 @@ const TaskSubmissionForm = () => {
   const [taskTitle, setTaskTitle] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [files, setFiles] = useState<FileList | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically handle the submission to a server or state management
-    console.log('Task Submitted:', { taskTitle, taskDescription });
+    console.log('Task Submitted:', { taskTitle, taskDescription, files });
     setSubmitted(true);
     setTaskTitle('');
     setTaskDescription('');
+    setFiles(null);
   };
 
   return (
@@ -46,6 +47,26 @@ const TaskSubmissionForm = () => {
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
             rows={4}
           />
+        </div>
+        <div>
+          <label htmlFor="taskFiles" className="block text-gray-700 font-medium mb-1">
+            Attach Files:
+          </label>
+          <input
+            type="file"
+            id="taskFiles"
+            multiple
+            accept="video/*,audio/*,image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"
+            onChange={(e) => setFiles(e.target.files)}
+            className="w-full"
+          />
+          {files && (
+            <ul className="mt-2 text-sm text-gray-600">
+              {Array.from(files).map((file, idx) => (
+                <li key={idx}>{file.name}</li>
+              ))}
+            </ul>
+          )}
         </div>
         <button
           type="submit"

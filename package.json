@@ -1,5 +1,5 @@
 {
-  "name": "school-website",
+  "name": "Algorise-management-system",
   "version": "1.0.0",
   "description": "A school website for task submissions and result generation.",
   "main": "src/app/page.tsx",
@@ -10,9 +10,11 @@
   },
   "dependencies": {
     "@prisma/client": "^6.8.2",
+    "@react-pdf/renderer": "^4.3.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "next": "^15.3.2",
+    "papaparse": "^5.5.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0"
@@ -32,8 +34,10 @@
     "school",
     "tasks",
     "results",
-    "submission"
+    "submission",
+    "Algorise",
+    "Explorers"
   ],
-  "author": "Your Name",
+  "author": "Muwatta",
   "license": "MIT"
 }

@@ -1,3 +1,4 @@
+
 const students = [
   { id: 1, name: "Sarah Lee", photo: "/students/sarah.jpg" },
   { id: 2, name: "James Bond", photo: "/students/james.jpg" },

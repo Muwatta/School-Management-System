@@ -15,29 +15,52 @@ model User {
   image     String?
   role      String   @default("user")
   createdAt DateTime @default(now())
-  teacher   Teacher? @relation("UserTeacher", fields: [teacherId], references: [id])
-  teacherId Int?
-  student   Student? @relation("UserStudent", fields: [studentId], references: [id])
-  studentId Int?
 }
 
 model Teacher {
-  id      Int    @id @default(autoincrement())
-  name    String
-  email   String @unique
-  users   User[] @relation("UserTeacher")
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
+  subjects Subject[] @relation("TeacherSubjects")
+  results  Result[]  @relation("TeacherResults")
 }
 
 model Student {
-  id      Int    @id @default(autoincrement())
-  name    String
-  email   String @unique
-  users   User[] @relation("UserStudent")
+  id       Int       @id @default(autoincrement())
+  name     String
+  email    String    @unique
+  subjects Subject[] @relation("StudentSubjects")
+  results  Result[]  @relation("StudentResults")
+  fees     Fee?
 }
 
 model Subject {
-  id        Int       @id @default(autoincrement())
-  name      String
-  teachers  Teacher[] @relation("TeacherSubjects")
-  students  Student[] @relation("StudentSubjects")
+  id       Int       @id @default(autoincrement())
+  name     String
+  teachers Teacher[] @relation("TeacherSubjects")
+  students Student[] @relation("StudentSubjects")
+  results  Result[]  @relation("SubjectResults")
+}
+
+model Result {
+  id         Int     @id @default(autoincrement())
+  student    Student @relation("StudentResults", fields: [studentId], references: [id])
+  studentId  Int
+  subject    Subject @relation("SubjectResults", fields: [subjectId], references: [id])
+  subjectId  Int
+  teacher    Teacher @relation("TeacherResults", fields: [teacherId], references: [id])
+  teacherId  Int
+  firstCA    Int
+  secondCA   Int
+  assignment Int
+  exam       Int
+
+  @@unique([studentId, subjectId])
+}
+
+model Fee {
+  id        Int     @id @default(autoincrement())
+  owed      Int
+  student   Student @relation(fields: [studentId], references: [id])
+  studentId Int     @unique
 }

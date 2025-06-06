@@ -39,7 +39,6 @@ function SignupForm({ onSuccess }: SignupFormProps) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-sm mx-auto bg-white p-8 rounded shadow mt-10"
     >
       <h2 className="text-2xl font-bold mb-6 text-blue-900 text-center">
         Sign Up
@@ -104,7 +103,6 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="w-full max-w-md bg-white rounded shadow p-8">
-        <h1 className="text-2xl font-bold mb-4">Sign Up</h1>
         <SignupForm />
       </div>
     </div>

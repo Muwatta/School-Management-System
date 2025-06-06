@@ -8,14 +8,21 @@ export async function GET() {
   return NextResponse.json({ students });
 }
 
+type StudentBody = {
+  name: string;
+  email: string;
+  teacherIds?: number[];
+  subjectIds?: number[];
+};
+
 export async function POST(request: Request) {
-  const { name, email, teacherIds, subjectIds } = await request.json();
+  const { name, email, teacherIds = [], subjectIds = [] }: StudentBody = await request.json();
   const student = await prisma.student.create({
     data: {
       name,
       email,
-      teachers: { connect: teacherIds.map(id => ({ id })) },
-      subjects: { connect: subjectIds.map(id => ({ id })) },
+      teachers: { connect: teacherIds.map((id: number) => ({ id })) },
+      subjects: { connect: subjectIds.map((id: number) => ({ id })) },
     },
   });
   return NextResponse.json({ student });

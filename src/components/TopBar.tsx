@@ -1,18 +1,29 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import {
+  FaBars,
+  FaTimes,
+  FaHome,
+  FaUserShield,
+  FaBook,
+  FaUser,
+  FaHeartbeat,
+  FaEnvelope,
+  FaTools,
+} from "react-icons/fa";
 import Link from "next/link";
 
 const navLinks = [
-  { label: "Main Dashboard", href: "/" },
-  { label: "Administration", href: "/admin" },
-  { label: "Academics", href: "/academics" },
-  { label: "Account", href: "/account" },
-  { label: "Health", href: "/health" },
-  { label: "Messages", href: "/messages" },
-  { label: "Tools", href: "/tools" },
+  { label: "Main Dashboard", href: "/", icon: <FaHome /> },
+  { label: "Administration", href: "/admin", icon: <FaUserShield /> },
+  { label: "Academics", href: "/academics", icon: <FaBook /> },
+  { label: "Account", href: "/account", icon: <FaUser /> },
+  { label: "Health", href: "/health", icon: <FaHeartbeat /> },
+  { label: "Messages", href: "/messages", icon: <FaEnvelope /> },
+  { label: "Tools", href: "/tools", icon: <FaTools /> },
 ];
 
-export default function TopBar({ user }) {
+export default function TopBar({ user }: { user?: { name?: string } }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
@@ -68,9 +79,10 @@ export default function TopBar({ user }) {
             <Link
               key={link.label}
               href={link.href}
-              className="py-2 px-3 rounded hover:bg-blue-50 font-medium transition"
+              className="flex items-center gap-3 py-2 px-3 rounded hover:bg-blue-50 font-medium transition"
               onClick={() => setSidebarOpen(false)}
             >
+              <span className="text-lg">{link.icon}</span>
               {link.label}
             </Link>
           ))}
@@ -86,39 +98,16 @@ export default function TopBar({ user }) {
         />
       )}
 
-      {/* Top Bar */}
+      {/* Top Bar: Only Hamburger (no logo, since it's in the sidebar) */}
       <div className="w-full bg-blue-900 text-white py-2 px-4 flex items-center justify-between shadow z-30 relative">
-        {/* Left: Hamburger & Logo */}
-        <div className="flex items-center gap-3">
-          <button
-            className="mr-2"
-            onClick={() => setSidebarOpen(true)}
-            aria-label="Open sidebar"
-          >
-            <FaBars size={22} />
-          </button>
-          <Link href="/">
-            <img
-              src="/logo.png"
-              alt="Logo"
-              className="h-8 w-8 rounded-full bg-white cursor-pointer"
-            />
-          </Link>
-        </div>
-
-        
-        {/* Right: Old Dashboard & User */}
-        <div className="flex items-center gap-4">
-          <a href="#" className="text-sm hover:underline hidden md:inline">
-            Old dashboard
-          </a>
-          <span className="text-sm">
-            Hi{" "}
-            <span className="font-semibold">
-              {user?.name ? user.name : "Guest"}
-            </span>
-          </span>
-        </div>
+        <button
+          className="mr-2"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open sidebar"
+        >
+          <FaBars size={22} />
+        </button>
+        {/* You can add other right-side content here if needed */}
       </div>
     </>
   );

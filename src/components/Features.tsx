@@ -1,7 +1,7 @@
 export default function Features() {
   return (
     <section className="container mx-auto px-6 py-16">
-      <h2 className="text-3xl font-bold text-center text-blue-900 mb-10">
+      <h2 className="text-3xl font-bold text-center white-blue-900 mb-10">
         Why Choose Our Portal?
       </h2>
       <div className="grid md:grid-cols-3 gap-8">
