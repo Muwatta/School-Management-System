@@ -1,4 +1,5 @@
 "use client";
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
@@ -29,6 +30,13 @@ export default function AdminLoginPage() {
       <input className="border p-2 mb-2 w-full" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} required />
       <input className="border p-2 mb-2 w-full" placeholder="Password" type="password" value={password} onChange={e => setPassword(e.target.value)} required />
       <button className="bg-blue-600 text-white px-4 py-2 rounded w-full" type="submit">Login</button>
+      <button
+        type="button"
+        className="bg-red-500 text-white px-4 py-2 rounded w-full mb-2"
+        onClick={() => signIn("google", { callbackUrl: "/admin/dashboard" })}
+      >
+        Sign in with Google
+      </button>
       {error && <div className="text-red-600 mt-2">{error}</div>}
     </form>
   );

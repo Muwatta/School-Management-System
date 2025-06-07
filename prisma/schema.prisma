@@ -21,39 +21,39 @@ model Teacher {
   id       Int       @id @default(autoincrement())
   name     String
   email    String    @unique
-  subjects Subject[] @relation("TeacherSubjects")
   results  Result[]  @relation("TeacherResults")
+  subjects Subject[] @relation("TeacherSubjects")
 }
 
 model Student {
   id       Int       @id @default(autoincrement())
   name     String
   email    String    @unique
-  subjects Subject[] @relation("StudentSubjects")
-  results  Result[]  @relation("StudentResults")
   fees     Fee?
+  results  Result[]  @relation("StudentResults")
+  subjects Subject[] @relation("StudentSubjects")
 }
 
 model Subject {
   id       Int       @id @default(autoincrement())
   name     String
-  teachers Teacher[] @relation("TeacherSubjects")
-  students Student[] @relation("StudentSubjects")
   results  Result[]  @relation("SubjectResults")
+  students Student[] @relation("StudentSubjects")
+  teachers Teacher[] @relation("TeacherSubjects")
 }
 
 model Result {
   id         Int     @id @default(autoincrement())
-  student    Student @relation("StudentResults", fields: [studentId], references: [id])
   studentId  Int
-  subject    Subject @relation("SubjectResults", fields: [subjectId], references: [id])
   subjectId  Int
-  teacher    Teacher @relation("TeacherResults", fields: [teacherId], references: [id])
   teacherId  Int
   firstCA    Int
   secondCA   Int
   assignment Int
   exam       Int
+  teacher    Teacher @relation("TeacherResults", fields: [teacherId], references: [id])
+  subject    Subject @relation("SubjectResults", fields: [subjectId], references: [id])
+  student    Student @relation("StudentResults", fields: [studentId], references: [id])
 
   @@unique([studentId, subjectId])
 }
@@ -61,6 +61,6 @@ model Result {
 model Fee {
   id        Int     @id @default(autoincrement())
   owed      Int
-  student   Student @relation(fields: [studentId], references: [id])
   studentId Int     @unique
+  student   Student @relation(fields: [studentId], references: [id])
 }

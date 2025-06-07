@@ -8,7 +8,6 @@ const TaskSubmissionForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Task Submitted:', { taskTitle, taskDescription, files });
     setSubmitted(true);
     setTaskTitle('');
     setTaskDescription('');
